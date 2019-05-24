@@ -14,17 +14,17 @@ public class MenuActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
+
     }
 
     public void onGameStart(View view) {
-        final Spinner spinner = view.findViewById(R.id.difficulty);
-        //String selection = spinner.getSelectedItem().toString().toUpperCase();
-        //Log.i("bug testing", selection);
-        //level = Difficulty.valueOf(selection.toUpperCase());
+        Spinner spinner = findViewById(R.id.difficultyspinner);
+        String selection = spinner.getSelectedItem().toString().toUpperCase();
+
 
         Intent intent = new Intent(this, MainActivity.class);
-        //intent.setType("text/plain");
-        //intent.putExtra(Intent.EXTRA_TEXT, selection);
+        intent.setType("text/plain");
+        intent.putExtra(MainActivity.EXTRA_MESSAGE, selection);
         //String chooserTitle = getString(R.string.chooser);
         //Intent chosenIntent = Intent.createChooser(intent, chooserTitle);
 

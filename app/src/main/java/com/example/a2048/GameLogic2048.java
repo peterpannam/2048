@@ -1,40 +1,59 @@
 package com.example.a2048;
 
 import android.util.Log;
+import android.widget.Switch;
 
-import java.util.Arrays;
 import java.util.Random;
 
-// TODO: 14/04/2019  create game over (find better way)
-// TODO: 14/04/2019  create a score (broken)
 // TODO: 14/04/2019  simplify logic (can probably just one method)
-// TODO: fix addition to middle column
 
 class GameLogic2048 {
     private Difficulty difficulty;
-    private int score = 0;
+    private int score = 0, difficultyNumber;
     private int grid[][];
     private Random random = new Random();
-    private boolean stateChange = false;
+    private boolean stateChange = false, runningStatus;
 
     GameLogic2048(){
-        this.grid = new int[4][4];
+        this.grid = new int[3][3];
         difficulty = Difficulty.EASY;
         populateGrid();
     }
 
-    GameLogic2048(int[][] grid){
+    GameLogic2048(int[][] grid, int score, Difficulty difficulty){
         this.grid = grid;
+        this.score = score;
+        this.difficulty = difficulty;
+        setDifficultyNumber();
     }
 
     GameLogic2048(Difficulty difficulty){
         this.difficulty = difficulty;
-        this.grid = new int[4][4];
+        this.grid = new int[3][3];
+        setDifficultyNumber();
         populateGrid();
     }
 
+    private void setDifficultyNumber() {
+        switch (difficulty){
+            case EASY:
+                difficultyNumber = 5;
+                break;
+            case MEDIUM:
+                difficultyNumber = 4;
+                break;
+            case HARD:
+                difficultyNumber = 3;
+                break;
+            case EXPERT:
+                difficultyNumber = 2;
+                break;
+        }
+    }
+
     private void populateGrid() {
-        for (int x = 0; x <2; x++){
+
+        for (int x = 0; x <difficultyNumber; x++){
             int z = random.nextInt(3);
             int y = random.nextInt(3);
             while (grid[z][y] == 1){
@@ -108,9 +127,10 @@ class GameLogic2048 {
         }
         if (stateChange){
             createNewNumber();
-        }
-        //else getGameOver();
+
+        } else checkGameOver();
         stateChange = false;
+
     }
 
     private void moveVertical(int y, int y2){
@@ -155,38 +175,28 @@ class GameLogic2048 {
         }
         if (stateChange){
             createNewNumber();
-        }
-        //else getGameOver();
+        } else checkGameOver();
         stateChange = false;
     }
 
     private void createNewNumber() {
-        int gameOverCount = 0, z = random.nextInt(3), y = random.nextInt(3);
-        for (int[] aGrid : grid) {
-            if (aGrid[0] != 0 && aGrid[1] != 0 && aGrid[2] != 0){
-                gameOverCount++;
-                System.out.println(gameOverCount);
-            }
-        }
-        if (gameOverCount == 3){ printGrid();
-            System.exit(0);
-        }
+        int z = random.nextInt(3), y = random.nextInt(3);
+
         while (grid[z][y] != 0){
             z = random.nextInt(3);
             y = random.nextInt(3);
         }
-        grid[z][y] = 1;
-        System.out.println(gameOverCount);
+        grid[z][y] = (int)Math.pow(2, random.nextInt(difficultyNumber));
     }
 
     public int[][] getGrid(){
         return grid;
      }
 
-    public int getScore(){return score;}
+    String getScore(){return "Score: " + score;}
 
     String[][] printGrid() {
-        String[][] stringGrid = new String[4][4];
+        String[][] stringGrid = new String[3][3];
         for (int x = 0; x < grid.length; x++) {
             stringGrid[x][0] =String.valueOf(grid[x][0]);
             stringGrid[x][1] =String.valueOf(grid[x][1]);
@@ -195,15 +205,32 @@ class GameLogic2048 {
         return stringGrid;
     }
 
-    private void getGameOver() {
-        int[][] gridTwo = grid;
-        moveUp();
-        moveDown();
-        moveLeft();
-        moveRight();
-        if (Arrays.deepEquals(gridTwo, grid)){
-            System.out.println("game over");
-        }else grid = gridTwo;
+    boolean getGameStatus(){
+        return runningStatus;
+    }
+
+    private void checkGameOver() {
+        int gameOver = 0;
+
+        for (int[] aGrid : grid) {
+            if (aGrid[0] == 0 || aGrid[1] == 0 || aGrid[2] == 0){
+                runningStatus = true;
+                gameOver += 1;
+                break;
+            }
+        }
+        if (gameOver != 1) {
+            for (int x = 0; x < grid.length; x++) {
+                if (x == 2) {
+                    if (grid[x][0] != grid[x][1] && grid[x][2] != grid[x][1]) {
+                        gameOver += 1;
+                    }
+                } else if (grid[x][0] != grid[x][1] && grid[x][0] != grid[x + 1][0] && grid[x][1] != grid[x + 1][1] && grid[x][2] != grid[x][1] && grid[x][2] != grid[x + 1][2]) {
+                    gameOver += 1;
+                }
+            }
+            runningStatus = gameOver != 3;
+        }
     }
 
     private void merge(){
