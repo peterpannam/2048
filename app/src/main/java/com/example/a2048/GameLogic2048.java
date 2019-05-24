@@ -71,7 +71,7 @@ class GameLogic2048 {
             if (grid[x][1] > 0 && grid[x][1] == grid[x][y]){
                 Log.i("movement", "case 1");
                 grid[x][y] = grid[x][1] + grid[x][y];
-                score+= grid[x][1] + grid[x][1];
+                score+= grid[x][y];
                 grid[x][1] = 0;
                 stateChange = true;
             }else if (grid[x][y] == 0 && grid[x][1] > 0){
@@ -83,7 +83,7 @@ class GameLogic2048 {
             if (grid[x][y2] > 0 && grid[x][y2] == grid[x][1]){
                 Log.i("movement", "case 3");
                 grid[x][1] = grid[x][1] + grid[x][y2];
-                score+= grid[x][1] + grid[x][1];
+                score+= grid[x][1];
                 grid[x][y2] = 0;
                 stateChange = true;
                 //break;
@@ -101,7 +101,7 @@ class GameLogic2048 {
             }else if (grid[x][y] == grid[x][1] && grid[x][y] > 0){
                 Log.i("movement", "case 6");
                 grid[x][y] = grid[x][1] + grid[x][y];
-                score+= grid[x][1] + grid[x][1];
+                score+= grid[x][y];
                 grid[x][1] = 0;
                 stateChange = true;
             }
@@ -119,7 +119,7 @@ class GameLogic2048 {
             if (grid[1][x] > 0 && grid[1][x] == grid[y][x]){
                 Log.i("movement", "case 1");
                 grid[y][x] = grid[1][x] + grid[y][x];
-                score+= grid[1][x] + grid[1][x];
+                score+= grid[y][x];
                 grid[1][x] = 0;
                 stateChange = true;
             }else if (grid[y][x] == 0 && grid[1][x] > 0){
@@ -130,7 +130,7 @@ class GameLogic2048 {
             }if (grid[y2][x] > 0 && grid[y2][x] == grid[1][x]){
                 Log.i("movement", "case 3");
                 grid[1][x] = grid[1][x] + grid[y2][x];
-                score+= grid[1][x] + grid[1][x];
+                score+= grid[1][x];
                 grid[y2][x] = 0;
                 stateChange = true;
                 //break;
@@ -148,7 +148,7 @@ class GameLogic2048 {
             }else if (grid[y][x] == grid[1][x] && grid[y][x] > 0){
                 Log.i("movement", "case 6");
                 grid[y][x] = grid[y][x] + grid[1][x];
-                score+= grid[1][x] + grid[1][x];
+                score+= grid[y][x];
                 grid[1][x] = 0;
                 stateChange = true;
             }
@@ -182,6 +182,8 @@ class GameLogic2048 {
     public int[][] getGrid(){
         return grid;
      }
+
+    public int getScore(){return score;}
 
     String[][] printGrid() {
         String[][] stringGrid = new String[4][4];

@@ -1,5 +1,6 @@
 package com.example.a2048;
 
+import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MotionEvent;
@@ -13,7 +14,7 @@ public class MainActivity extends AppCompatActivity{
     float startX, startY, finishX, finishY;
     String[][] stringGrid;
     TextView zerozero, zeroone, zerotwo, zerothree, onezero, oneone, onetwo, onethree, twozero,
-            twoone, twotwo, twothree, threezero, threeone, threetwo, threethree;
+            twoone, twotwo, twothree, threezero, threeone, threetwo, threethree, score;
     GameLogic2048 game;
 
     @Override
@@ -25,7 +26,14 @@ public class MainActivity extends AppCompatActivity{
         //difficulty = Difficulty.valueOf(intent.getStringExtra(EXTRA_MESSAGE));
 
         game = new GameLogic2048(difficulty);
+        SQLiteDatabase mydatabase = openOrCreateDatabase("Score",MODE_PRIVATE,null);
 
+        defineTextViews();
+
+        setText();
+    }
+
+    private void defineTextViews() {
         zerozero = findViewById(R.id.zerozero);
         zeroone = findViewById(R.id.zeroone);
         zerotwo = findViewById(R.id.zerotwo);
@@ -42,7 +50,7 @@ public class MainActivity extends AppCompatActivity{
         threeone = findViewById(R.id.threeone);
         threetwo = findViewById(R.id.threetwo);
         threethree = findViewById(R.id.threethree);
-        setText();
+        score = findViewById(R.id.score);
     }
 
     private void setText() {
@@ -63,6 +71,7 @@ public class MainActivity extends AppCompatActivity{
         threeone.setText(stringGrid[3][1]);
         threetwo.setText(stringGrid[3][2]);
         threethree.setText(stringGrid[3][3]);
+        score.setText(game.getScore());
     }
 
     public void moveLeft(){
