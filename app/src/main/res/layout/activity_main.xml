@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/layout"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
-
-
 
         <TableRow
             android:background="#d9dde2"
@@ -18,7 +16,6 @@
             android:layout_height="match_parent" >
 
             <TextView
-                android:text="top"
                 android:textColor="#000000"
                 android:layout_weight="1"
                 android:textSize="56sp"
@@ -45,6 +42,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
 
+            <TextView
+                android:textColor="#000000"
+                android:layout_weight="1"
+                android:textSize="56sp"
+                android:textAlignment="center"
+                android:id="@+id/zerothree"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
         </TableRow>
 
         <TableRow
@@ -75,7 +80,6 @@
                 android:layout_height="wrap_content"/>
 
             <TextView
-                android:text="middle"
                 android:textColor="#000000"
                 android:layout_weight="1"
                 android:textSize="56sp"
@@ -84,6 +88,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
 
+            <TextView
+                android:textColor="#000000"
+                android:layout_weight="1"
+                android:textSize="56sp"
+                android:textAlignment="center"
+                android:id="@+id/onethree"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
         </TableRow>
 
         <TableRow
@@ -114,7 +126,6 @@
                 android:layout_height="wrap_content"/>
 
             <TextView
-                android:text="null"
                 android:textColor="#000000"
                 android:layout_weight="1"
                 android:textSize="56sp"
@@ -123,53 +134,60 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
 
+            <TextView
+                android:textColor="#000000"
+                android:layout_weight="1"
+                android:textSize="56sp"
+                android:textAlignment="center"
+                android:id="@+id/twothree"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
         </TableRow>
+
     <TableRow
+        android:background="#D757E4"
         android:paddingTop="10dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:paddingBottom="20dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent" >
 
-        <Button
-            android:id="@+id/left"
-            style="@style/Widget.AppCompat.Button"
+        <TextView
+            android:textColor="#000000"
             android:layout_weight="1"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:onClick="moveLeft"
-            android:text="left"
-            android:textAppearance="@style/TextAppearance.AppCompat.Widget.Button" />
+            android:textSize="56sp"
+            android:textAlignment="center"
+            android:id="@+id/threezero"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
 
-        <Button
-            android:id="@+id/up"
-            style="@style/Widget.AppCompat.Button"
+        <TextView
+            android:textColor="#000000"
             android:layout_weight="1"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:onClick="moveUp"
-            android:text="up"
-            android:textAppearance="@style/TextAppearance.AppCompat.Widget.Button" />
+            android:textSize="56sp"
+            android:textAlignment="center"
+            android:id="@+id/threeone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
 
-        <Button
-            android:id="@+id/down"
-            style="@style/Widget.AppCompat.Button"
+        <TextView
+            android:textColor="#000000"
             android:layout_weight="1"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:onClick="moveDown"
-            android:text="down"
-            android:textAppearance="@style/TextAppearance.AppCompat.Widget.Button" />
+            android:textSize="56sp"
+            android:textAlignment="center"
+            android:id="@+id/threetwo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
 
-        <Button
-            android:id="@+id/right"
-            style="@style/Widget.AppCompat.Button"
+        <TextView
+            android:textColor="#000000"
             android:layout_weight="1"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:onClick="moveRight"
-            android:text="right"
-            android:textAppearance="@style/TextAppearance.AppCompat.Widget.Button" />
+            android:textSize="56sp"
+            android:textAlignment="center"
+            android:id="@+id/threethree"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
     </TableRow>
-
-
 
     </TableLayout>

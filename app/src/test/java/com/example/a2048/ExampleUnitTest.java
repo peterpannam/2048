@@ -12,6 +12,11 @@ import static org.junit.Assert.*;
 public class ExampleUnitTest {
     @Test
     public void addition_isCorrect() {
-        assertEquals(4, 2 + 2);
+
+        int negative1 = -5 ;
+        int negative2 = 5;
+        int positive = Math.abs(negative1 - negative2);
+
+        assertEquals(10, positive);
     }
 }
