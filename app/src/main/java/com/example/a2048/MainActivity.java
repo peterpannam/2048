@@ -3,6 +3,7 @@ package com.example.a2048;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.widget.TextView;
 
@@ -26,10 +27,9 @@ public class MainActivity extends AppCompatActivity{
         //difficulty = Difficulty.valueOf(intent.getStringExtra(EXTRA_MESSAGE));
 
         game = new GameLogic2048(difficulty);
-        SQLiteDatabase mydatabase = openOrCreateDatabase("Score",MODE_PRIVATE,null);
+
 
         defineTextViews();
-
         setText();
     }
 
@@ -71,7 +71,7 @@ public class MainActivity extends AppCompatActivity{
         threeone.setText(stringGrid[3][1]);
         threetwo.setText(stringGrid[3][2]);
         threethree.setText(stringGrid[3][3]);
-        score.setText(game.getScore());
+        score.setText(String.valueOf(game.getScore()));
     }
 
     public void moveLeft(){
