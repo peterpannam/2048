@@ -117,8 +117,17 @@ public class MainActivity extends AppCompatActivity{
 
     private void isGameOver() {
         gameStatus = game.getGameStatus();
-        if (!gameStatus){
+        if (gameStatus){
             System.out.println("game over");
+            startGameOverActivity();
         }
+    }
+
+    private void startGameOverActivity() {
+        Intent intent = new Intent(this, GameOverActivity.class);
+        intent.setType("text/plain");
+        intent.putExtra(GameOverActivity.SCORE_MESSAGE, score.toString());
+        startActivity(intent);
+
     }
 }
