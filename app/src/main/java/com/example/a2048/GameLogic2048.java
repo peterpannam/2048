@@ -3,20 +3,14 @@ package com.example.a2048;
 import android.util.Log;
 import java.util.Random;
 
-// TODO: 14/04/2019  simplify logic (can probably just one method)
-
+/**
+ * logic class for the game
+ */
 class GameLogic2048 {
     private Difficulty difficulty;
     private int score = 0, difficultyNumber;
     private int grid[][], grid2[][];
     private Random random = new Random();
-    private boolean stateChange = false, runningStatus;
-
-    GameLogic2048(){
-        this.grid = new int[3][3];
-        difficulty = Difficulty.EASY;
-        populateGrid();
-    }
 
     GameLogic2048(int[][] grid, int score, Difficulty difficulty){
         this.grid = grid;
@@ -33,6 +27,9 @@ class GameLogic2048 {
         populateGrid();
     }
 
+    /**
+     * determines how many numbers spawn and how large those numbers are
+     */
     private void setDifficultyNumber() {
         switch (difficulty){
             case EASY:
@@ -50,8 +47,10 @@ class GameLogic2048 {
         }
     }
 
+    /**
+     * spawns initial numbers randomly onto the grid
+     */
     private void populateGrid() {
-
         for (int x = 0; x <difficultyNumber; x++){
             int z = random.nextInt(3);
             int y = random.nextInt(3);
@@ -64,68 +63,68 @@ class GameLogic2048 {
     }
 
     void moveLeft() {
-        System.out.println("move left");
+        Log.i("movement", "move left");
         moveHorizontal(0,2);
     }
 
     void moveRight() {
-        System.out.println("move right");
+        Log.i("movement", "move right");
         moveHorizontal(2,0);
     }
 
     void moveDown() {
-        System.out.println("move down");
+        Log.i("movement", "move up");
         moveVertical(2,0);
     }
 
     void moveUp() {
-        System.out.println("move up");
+        Log.i("movement", "move down");
         moveVertical(0,2);
     }
 
+    /**
+     * logic for movement of left and right, works essentially by merging two cells together
+     * same as logic for vertical movement only the grid is reversed
+     */
     private void moveHorizontal(int y, int y2){
-        Log.i("movement", "enter horizontal");
         for (int x=0; x < grid.length; x++){
             if (grid[x][1] > 0 && grid[x][1] == grid[x][y]){
                 Log.i("movement", "case 1");
                 grid[x][y] = grid[x][1] + grid[x][y];
                 score+= grid[x][y];
                 grid[x][1] = 0;
-                stateChange = true;
             }else if (grid[x][y] == 0 && grid[x][1] > 0){
                 Log.i("movement", "case 2");
                 grid[x][y] = grid[x][1];
                 grid[x][1] = 0;
-                stateChange = true;
             }
             if (grid[x][y2] > 0 && grid[x][y2] == grid[x][1]){
                 Log.i("movement", "case 3");
                 grid[x][1] = grid[x][1] + grid[x][y2];
                 score+= grid[x][1];
                 grid[x][y2] = 0;
-                stateChange = true;
-                //break;
                 continue;
             }else if (grid[x][1] == 0 && grid[x][y2] > 0){
                 Log.i("movement", "case 4");
                 grid[x][1] = grid[x][y2];
                 grid[x][y2] = 0;
-                stateChange = true;
             }if (grid[x][y] == 0 && grid[x][1] >= 1){
                 Log.i("movement", "case 5");
                 grid[x][y] = grid[x][1];
                 grid[x][1] = 0;
-                stateChange = true;
             }else if (grid[x][y] == grid[x][1] && grid[x][y] > 0){
                 Log.i("movement", "case 6");
                 grid[x][y] = grid[x][1] + grid[x][y];
                 score+= grid[x][y];
                 grid[x][1] = 0;
-                stateChange = true;
             }
         }
     }
 
+    /**
+     * logic for movement of up and down, works essentially by merging two cells together
+     * same as logic for horizontal movement only the grid is reversed
+     */
     private void moveVertical(int y, int y2){
         Log.i("movement", "enter verticle");
         for (int x=0; x < grid.length; x++){
@@ -134,40 +133,36 @@ class GameLogic2048 {
                 grid[y][x] = grid[1][x] + grid[y][x];
                 score+= grid[y][x];
                 grid[1][x] = 0;
-                stateChange = true;
             }else if (grid[y][x] == 0 && grid[1][x] > 0){
                 Log.i("movement", "case 2");
                 grid[y][x] = grid[1][x];
                 grid[1][x] = 0;
-                stateChange = true;
             }if (grid[y2][x] > 0 && grid[y2][x] == grid[1][x]){
                 Log.i("movement", "case 3");
                 grid[1][x] = grid[1][x] + grid[y2][x];
                 score+= grid[1][x];
                 grid[y2][x] = 0;
-                stateChange = true;
-                //break;
                 continue;
             }else if (grid[1][x] == 0 && grid[y2][x] > 0){
                 Log.i("movement", "case 4");
                 grid[1][x] = grid[y2][x];
                 grid[y2][x] = 0;
-                stateChange = true;
             }if (grid[y][x] == 0 && grid[1][x] >= 1){
                 Log.i("movement", "case 5");
                 grid[y][x] = grid[1][x];
                 grid[1][x] = 0;
-                stateChange = true;
             }else if (grid[y][x] == grid[1][x] && grid[y][x] > 0){
                 Log.i("movement", "case 6");
                 grid[y][x] = grid[y][x] + grid[1][x];
                 score+= grid[y][x];
                 grid[1][x] = 0;
-                stateChange = true;
             }
         }
     }
 
+    /**
+     * creates new number, size of number depends on the difficulty
+     */
     private void createNewNumber() {
         int z = random.nextInt(3), y = random.nextInt(3);
 
@@ -178,12 +173,29 @@ class GameLogic2048 {
         grid[z][y] = (int)Math.pow(2, random.nextInt(difficultyNumber));
     }
 
-    public int[][] getGrid(){
-        return grid;
-     }
+    /**
+     * returns a specific row of the grid
+     */
+    int[] getGrid(int gridRow){
+        int[] copiedGrid = new int[3];
+        for (int x = 0; x < grid.length; x++ ){
+            if (x == gridRow){
+                for (int y = 0; x < grid.length; x++){
+                    copiedGrid[y] = grid[x][y];
+                }
+                return copiedGrid;
+            }
+        }return null;
+    }
 
-    String getScore(){return String.valueOf(score)  ;}
+    /**
+     * returns the score as a string
+     */
+    String getScore(){return String.valueOf(score);}
 
+    /**
+     * returns a 2d string of the game grid
+     */
     String[][] printGrid() {
         String[][] stringGrid = new String[3][3];
         for (int x = 0; x < grid.length; x++) {
@@ -194,19 +206,19 @@ class GameLogic2048 {
         return stringGrid;
     }
 
+    /**
+     * method that checks if their are any more moves left to make
+     */
     boolean checkGameOver() {
         Log.i("game status", "checking if game is over");
-
         for (int[] aGrid : grid) {
-            for (int y = 0; y < grid.length; y++) {
-                if (aGrid[y] == 0) {
-                    System.out.println("hello");
+            for (int y = 0; y < grid.length; y++) { //segments determines if there are any 0"s remaining
+                if (aGrid[y] == 0) {                //if so stops adds new number to the field then ends method
                     createNewNumber();
                     return false;
                 }
             }
         }
-
         deepCopy(grid, grid2);
         moveUp();
         moveRight();
@@ -228,11 +240,12 @@ class GameLogic2048 {
         return true;
     }
 
+    /**
+     * copys the current grid to allow for a comparison
+     */
     private void deepCopy(int[][] original, int[][] copy) {
         for (int x = 0; x < grid.length; x++){
-            for (int y = 0; y < grid.length; y++){
-                copy[x][y] = original[x][y];
-            }
+            System.arraycopy(original[x], 0, copy[x], 0, grid.length);
         }
     }
 }

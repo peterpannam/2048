@@ -1,19 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
-<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/layout"
+<android.support.v7.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".GameActivity">
 
+    <TextView
+        android:textColor="#000000"
+        android:textSize="32sp"
+        android:textAlignment="center"
+        android:id="@+id/score"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <TableLayout
+        android:id="@+id/layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
         <TableRow
-            android:background="#d9dde2"
             android:paddingTop="10dp"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
             android:paddingBottom="20dp"
+            android:layout_weight="1"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" >
+            android:layout_height="wrap_content" >
 
             <TextView
                 android:textColor="#000000"
@@ -21,8 +34,8 @@
                 android:textSize="56sp"
                 android:textAlignment="center"
                 android:id="@+id/zerozero"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"/>
 
             <TextView
                 android:textColor="#000000"
@@ -30,8 +43,8 @@
                 android:textSize="56sp"
                 android:textAlignment="center"
                 android:id="@+id/zeroone"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"/>
 
             <TextView
                 android:textColor="#000000"
@@ -39,18 +52,18 @@
                 android:textSize="56sp"
                 android:textAlignment="center"
                 android:id="@+id/zerotwo"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"/>
         </TableRow>
 
         <TableRow
-            android:background="#5FAFE6"
             android:paddingTop="10dp"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
             android:paddingBottom="20dp"
+            android:layout_weight="1"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" >
+            android:layout_height="wrap_content" >
 
             <TextView
                 android:textColor="#000000"
@@ -58,8 +71,8 @@
                 android:textSize="56sp"
                 android:textAlignment="center"
                 android:id="@+id/onezero"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"/>
 
             <TextView
                 android:textColor="#000000"
@@ -67,8 +80,8 @@
                 android:textSize="56sp"
                 android:textAlignment="center"
                 android:id="@+id/oneone"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"/>
 
             <TextView
                 android:textColor="#000000"
@@ -76,18 +89,18 @@
                 android:textSize="56sp"
                 android:textAlignment="center"
                 android:id="@+id/onetwo"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"/>
         </TableRow>
 
         <TableRow
-            android:background="#D757E4"
             android:paddingTop="10dp"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
             android:paddingBottom="20dp"
+            android:layout_weight="1"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" >
+            android:layout_height="wrap_content" >
 
             <TextView
                 android:textColor="#000000"
@@ -95,8 +108,8 @@
                 android:textSize="56sp"
                 android:textAlignment="center"
                 android:id="@+id/twozero"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"/>
 
             <TextView
                 android:textColor="#000000"
@@ -104,8 +117,8 @@
                 android:textSize="56sp"
                 android:textAlignment="center"
                 android:id="@+id/twoone"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"/>
 
             <TextView
                 android:textColor="#000000"
@@ -113,21 +126,10 @@
                 android:textSize="56sp"
                 android:textAlignment="center"
                 android:id="@+id/twotwo"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"/>
         </TableRow>
 
-    <TableRow>
-        <TextView
-            android:textColor="#000000"
-            android:layout_weight="1"
-            android:textSize="56sp"
-            android:textAlignment="center"
-            android:id="@+id/score"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-    </TableRow>
-
-
-
     </TableLayout>
+
+</android.support.v7.widget.LinearLayoutCompat>

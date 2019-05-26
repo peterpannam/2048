@@ -11,9 +11,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="AllowBackup,GoogleAppIndexingWarning">
-        <activity android:name=".HighScoresActivity" />
-        <activity android:name=".GameOverActivity" />
-        <activity android:name=".SettingActivity" />
+        <activity android:name=".HighScoresActivity" android:screenOrientation="portrait" />
+        <activity android:name=".GameOverActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".SettingActivity" android:screenOrientation="portrait"/>
         <activity android:name=".MenuActivity"
             tools:ignore="ExtraText">
 
@@ -23,9 +23,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".GameActivity" >
+        <activity android:name=".GameActivity"
+            android:screenOrientation="portrait"/>
 
-        </activity>
     </application>
 
 </manifest>

@@ -13,7 +13,11 @@ import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 import android.widget.Toast;
 
+import com.example.a2048.database.ScoreDatabaseHelper;
 
+/**
+ * displays the users high scores
+ */
 public class HighScoresActivity extends AppCompatActivity {
     public static final String DIFFICULTY_MESSAGE = "difficulty";
     private SQLiteDatabase db;
@@ -27,6 +31,8 @@ public class HighScoresActivity extends AppCompatActivity {
         Intent intent = getIntent();
         String difficulty = intent.getStringExtra(DIFFICULTY_MESSAGE);
 
+        //reads high scores from database, stores them in cursor adapter, sorts it from highest to lowest
+        //then displays in a listView
         try {
             SQLiteOpenHelper scoreDatabaseHelper = new ScoreDatabaseHelper(this);
             db = scoreDatabaseHelper.getReadableDatabase();
@@ -40,7 +46,6 @@ public class HighScoresActivity extends AppCompatActivity {
                     cursor, new String[]{"SCORE"}, new int[]{R.id.txt}, 0 );
             ListView list = findViewById(R.id.list);
             list.setAdapter(listAdapter);
-
         } catch (SQLException e){
             Toast toast = Toast.makeText(this, "failed to show high scores", Toast.LENGTH_SHORT);
             toast.show();

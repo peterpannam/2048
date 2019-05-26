@@ -17,10 +17,9 @@
         android:src="@drawable/logo"
         app:layout_constraintBottom_toTopOf="@+id/difficultyspinner"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.425"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0"
+        app:layout_constraintVertical_bias="0.27999997"
         tools:ignore="ContentDescription" />
 
     <Spinner
@@ -28,7 +27,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="124dp"
-        android:layout_marginTop="355dp"
         android:layout_marginEnd="164dp"
         android:layout_marginBottom="352dp"
         android:entries="@array/difficulty"
@@ -36,36 +34,39 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/logo"
         app:layout_constraintVertical_bias="0.0" />
 
     <Button
         android:id="@+id/button"
-        android:onClick="onGameStart"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="140dp"
-        android:layout_marginTop="444dp"
+        android:layout_marginTop="300dp"
         android:layout_marginEnd="183dp"
         android:layout_marginBottom="239dp"
+        android:onClick="onGameStart"
+        android:paddingBottom="10dp"
         android:text="@string/play"
         app:layout_constraintBottom_toBottomOf="@id/settingsButton"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toTopOf="@id/difficultyspinner"
+        app:layout_constraintVertical_bias="0.55" />
 
     <Button
         android:id="@+id/settingsButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="156dp"
         android:onClick="onSettingsStart"
+        android:paddingBottom="10dp"
         android:text="@string/settings"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.439"
+        app:layout_constraintHorizontal_bias="0.433"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/button"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toBottomOf="@+id/button" />
 
 </android.support.constraint.ConstraintLayout>

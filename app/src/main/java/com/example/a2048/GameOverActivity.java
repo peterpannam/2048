@@ -11,29 +11,33 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.a2048.database.ScoreDatabaseHelper;
+
+/**
+ * runs once game is over, allows user to share score and view the high scores
+ */
 public class GameOverActivity extends AppCompatActivity {
     public static final String SCORE_MESSAGE = "score";
     public static final String DIFFICULTY_MESSAGE = "difficulty";
-    TextView scoreDisplay;
-    String score, difficulty, name;
+    private String score, difficulty;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game_over);
 
-        Intent intent = getIntent();
+        Intent intent = getIntent();                    //retrieving info from game class
         score  = intent.getStringExtra(SCORE_MESSAGE);
         difficulty = intent.getStringExtra(DIFFICULTY_MESSAGE);
-        scoreDisplay = findViewById(R.id.scoreDisplay);
+        TextView scoreDisplay = findViewById(R.id.scoreDisplay);
         scoreDisplay.setText(score);
 
+        //storing it to the database
         SQLiteOpenHelper scoreDatabaseHelper = new ScoreDatabaseHelper(this);
         try {
             SQLiteDatabase db = scoreDatabaseHelper.getWritableDatabase();
             ContentValues scoreValues = new ContentValues();
             scoreValues.put("SCORE", Integer.parseInt(score));
-            scoreValues.put("NAME", name);
             scoreValues.put("DIFFICULTY", difficulty);
             db.insert("SCORE", null, scoreValues);
             db.close();
@@ -52,6 +56,13 @@ public class GameOverActivity extends AppCompatActivity {
         Intent intent = new Intent(this, HighScoresActivity.class);
         intent.setType("text/plain");
         intent.putExtra(GameOverActivity.DIFFICULTY_MESSAGE, difficulty);
+        startActivity(intent);
+    }
+
+    public void shareToMedia(View view) {
+        Intent intent = new Intent(Intent.ACTION_SEND);
+        intent.setType("text/plain");
+        intent.putExtra(Intent.EXTRA_TEXT, score);
         startActivity(intent);
     }
 }
