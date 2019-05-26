@@ -3,9 +3,10 @@ package com.example.a2048;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Spinner;
+
+import static com.example.a2048.SettingActivity.SETTINGS_REQUEST;
 
 public class MenuActivity extends AppCompatActivity {
     Difficulty level;
@@ -22,12 +23,15 @@ public class MenuActivity extends AppCompatActivity {
         String selection = spinner.getSelectedItem().toString().toUpperCase();
 
 
-        Intent intent = new Intent(this, MainActivity.class);
+        Intent intent = new Intent(this, GameActivity.class);
         intent.setType("text/plain");
-        intent.putExtra(MainActivity.EXTRA_MESSAGE, selection);
-        //String chooserTitle = getString(R.string.chooser);
-        //Intent chosenIntent = Intent.createChooser(intent, chooserTitle);
+        intent.putExtra(GameActivity.EXTRA_MESSAGE, selection);
 
         startActivity(intent);
+    }
+
+    public void onSettingsStart(View view) {
+        Intent intent = new Intent(this, SettingActivity.class);
+        startActivityForResult(intent, SETTINGS_REQUEST);
     }
 }

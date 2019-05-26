@@ -1,14 +1,13 @@
 package com.example.a2048;
 
 import android.content.Intent;
-import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.widget.TextView;
 
-public class MainActivity extends AppCompatActivity{
+public class GameActivity extends AppCompatActivity{
     public static final String EXTRA_MESSAGE = "message";
     Difficulty difficulty;
     boolean gameStatus;
@@ -21,12 +20,13 @@ public class MainActivity extends AppCompatActivity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_game);
+
         Intent intent = getIntent();
         String selection  = intent.getStringExtra(EXTRA_MESSAGE);
         difficulty = Difficulty.valueOf(selection);
-
         game = new GameLogic2048(difficulty);
+
         defineTextViews();
         setText();
     }
@@ -116,18 +116,21 @@ public class MainActivity extends AppCompatActivity{
     }
 
     private void isGameOver() {
-        gameStatus = game.getGameStatus();
+        gameStatus = game.checkGameOver();
         if (gameStatus){
-            System.out.println("game over");
+            Log.i("gamestatus", "game over");
             startGameOverActivity();
-        }
+        }else Log.i("gamestatus", "game continues");
     }
 
     private void startGameOverActivity() {
+        //save score to db
+
         Intent intent = new Intent(this, GameOverActivity.class);
         intent.setType("text/plain");
-        intent.putExtra(GameOverActivity.SCORE_MESSAGE, score.toString());
+        //will need to pass difficulty for db query later
+        intent.putExtra(GameOverActivity.SCORE_MESSAGE, game.getScore());
+        intent.putExtra(GameOverActivity.DIFFICULTY_MESSAGE, difficulty.toString());
         startActivity(intent);
-
     }
 }

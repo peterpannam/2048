@@ -1,8 +1,6 @@
 package com.example.a2048;
 
 import android.util.Log;
-import android.widget.Switch;
-
 import java.util.Random;
 
 // TODO: 14/04/2019  simplify logic (can probably just one method)
@@ -10,7 +8,7 @@ import java.util.Random;
 class GameLogic2048 {
     private Difficulty difficulty;
     private int score = 0, difficultyNumber;
-    private int grid[][];
+    private int grid[][], grid2[][];
     private Random random = new Random();
     private boolean stateChange = false, runningStatus;
 
@@ -30,6 +28,7 @@ class GameLogic2048 {
     GameLogic2048(Difficulty difficulty){
         this.difficulty = difficulty;
         this.grid = new int[3][3];
+        this.grid2= new int[3][3];
         setDifficultyNumber();
         populateGrid();
     }
@@ -85,7 +84,7 @@ class GameLogic2048 {
     }
 
     private void moveHorizontal(int y, int y2){
-        Log.i("movement", "enter verticle");
+        Log.i("movement", "enter horizontal");
         for (int x=0; x < grid.length; x++){
             if (grid[x][1] > 0 && grid[x][1] == grid[x][y]){
                 Log.i("movement", "case 1");
@@ -125,12 +124,6 @@ class GameLogic2048 {
                 stateChange = true;
             }
         }
-        if (stateChange){
-            createNewNumber();
-
-        } else checkGameOver();
-        stateChange = false;
-
     }
 
     private void moveVertical(int y, int y2){
@@ -173,10 +166,6 @@ class GameLogic2048 {
                 stateChange = true;
             }
         }
-        if (stateChange){
-            createNewNumber();
-        } else checkGameOver();
-        stateChange = false;
     }
 
     private void createNewNumber() {
@@ -193,7 +182,7 @@ class GameLogic2048 {
         return grid;
      }
 
-    String getScore(){return "Score: " + score;}
+    String getScore(){return String.valueOf(score)  ;}
 
     String[][] printGrid() {
         String[][] stringGrid = new String[3][3];
@@ -205,35 +194,45 @@ class GameLogic2048 {
         return stringGrid;
     }
 
-    boolean getGameStatus(){
-        return runningStatus;
-    }
-
-    private void checkGameOver() {
-        int gameOver = 0;
+    boolean checkGameOver() {
+        Log.i("game status", "checking if game is over");
 
         for (int[] aGrid : grid) {
-            if (aGrid[0] == 0 || aGrid[1] == 0 || aGrid[2] == 0){
-                runningStatus = true;
-                gameOver += 1;
-                break;
-            }
-        }
-        if (gameOver != 1) {
-            for (int x = 0; x < grid.length; x++) {
-                if (x == 2) {
-                    if (grid[x][0] != grid[x][1] && grid[x][2] != grid[x][1]) {
-                        gameOver += 1;
-                    }
-                } else if (grid[x][0] != grid[x][1] && grid[x][0] != grid[x + 1][0] && grid[x][1] != grid[x + 1][1] && grid[x][2] != grid[x][1] && grid[x][2] != grid[x + 1][2]) {
-                    gameOver += 1;
+            for (int y = 0; y < grid.length; y++) {
+                if (aGrid[y] == 0) {
+                    System.out.println("hello");
+                    createNewNumber();
+                    return false;
                 }
             }
-            runningStatus = gameOver != 3;
         }
+
+        deepCopy(grid, grid2);
+        moveUp();
+        moveRight();
+        moveDown();
+        moveLeft();
+
+        for (int x = 0; x < grid.length; x++){
+            for (int y = 0; y < grid.length; y++){
+                Log.i("comparason", "grid: " + grid[x][y] + " grid 2: " +  grid2[x][y]);
+                if (grid[x][y] != grid2[x][y]){
+                    Log.i("gamestatus", "arrays not equal");
+                    deepCopy(grid2, grid);
+                    createNewNumber();
+                    return false;
+                }
+            }
+        }
+        Log.i("gamestatus", "arrays are equal");
+        return true;
     }
 
-    private void merge(){
-
+    private void deepCopy(int[][] original, int[][] copy) {
+        for (int x = 0; x < grid.length; x++){
+            for (int y = 0; y < grid.length; y++){
+                copy[x][y] = original[x][y];
+            }
+        }
     }
 }
