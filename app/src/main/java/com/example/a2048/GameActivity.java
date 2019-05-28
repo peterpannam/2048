@@ -3,6 +3,7 @@ package com.example.a2048;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Color;
+import android.media.MediaPlayer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -23,13 +24,16 @@ public class GameActivity extends AppCompatActivity{
     private List<TextView> textViewList = new ArrayList<>();
     private GameLogic2048 game;
     private Dictionary<String, String> colorScheme;
-
-
+    private MediaPlayer background;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
+
+        background = MediaPlayer.create(this, R.raw.background_music);
+        background.setLooping(true);
+        background.start();
 
         colorScheme = new Hashtable<>();
         if(savedInstanceState == null){
@@ -228,6 +232,12 @@ public class GameActivity extends AppCompatActivity{
                 break;
         }
         return true;
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        background.stop();
     }
 
     /**
