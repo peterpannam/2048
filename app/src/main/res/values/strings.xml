@@ -7,6 +7,8 @@
     <string name="share">Share!</string>
     <string name="main_menu">Main Menu</string>
     <string name="high_scores">High Scores</string>
+    <string name="tile_colour">Tile Colour:</string>
+    <string name="enter_name_here">Enter Name Here</string>
     <string-array name="difficulty">
         <item>"Easy"</item>
         <item>"Medium"</item>

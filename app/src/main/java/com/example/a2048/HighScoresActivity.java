@@ -37,13 +37,13 @@ public class HighScoresActivity extends AppCompatActivity {
             SQLiteOpenHelper scoreDatabaseHelper = new ScoreDatabaseHelper(this);
             db = scoreDatabaseHelper.getReadableDatabase();
             cursor = db.query("SCORE",
-                                            new String[] {"_id", "SCORE"},
+                                            new String[] {"_id","NAME","SCORE"},
                                             "DIFFICULTY = ?",
                                             new String[] {difficulty},
                                             null, null, "SCORE DESC");
 
             CursorAdapter listAdapter = new SimpleCursorAdapter(this, R.layout.list_score,
-                    cursor, new String[]{"SCORE"}, new int[]{R.id.txt}, 0 );
+                    cursor, new String[]{"NAME", "SCORE"}, new int[]{R.id.txt}, 0 );
             ListView list = findViewById(R.id.list);
             list.setAdapter(listAdapter);
         } catch (SQLException e){

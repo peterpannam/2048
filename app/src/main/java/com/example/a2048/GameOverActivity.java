@@ -29,15 +29,27 @@ public class GameOverActivity extends AppCompatActivity {
         Intent intent = getIntent();                    //retrieving info from game class
         score  = intent.getStringExtra(SCORE_MESSAGE);
         difficulty = intent.getStringExtra(DIFFICULTY_MESSAGE);
+
         TextView scoreDisplay = findViewById(R.id.scoreDisplay);
         scoreDisplay.setText(score);
+    }
 
-        //storing it to the database
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+
+        TextView nameDisplay = findViewById(R.id.nameDisplay);
+        String name = nameDisplay.toString();
+        if (name.equals("Enter Name Here")){
+            name = "unknown";
+        }
+        //storing score difficulty and name to the database
         SQLiteOpenHelper scoreDatabaseHelper = new ScoreDatabaseHelper(this);
         try {
             SQLiteDatabase db = scoreDatabaseHelper.getWritableDatabase();
             ContentValues scoreValues = new ContentValues();
             scoreValues.put("SCORE", Integer.parseInt(score));
+            scoreValues.put("NAME", name);
             scoreValues.put("DIFFICULTY", difficulty);
             db.insert("SCORE", null, scoreValues);
             db.close();

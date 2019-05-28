@@ -7,12 +7,19 @@
     tools:context=".GameOverActivity">
 
     <TextView
+        android:paddingBottom="50dp"
         android:layout_width="match_parent"
         android:textAlignment="center"
         android:textSize="32sp"
         android:layout_height="wrap_content"
         android:id="@+id/scoreDisplay"/>
-
+    <TextView
+        android:textColor="#000000"
+        android:textAlignment="center"
+        android:id="@+id/nameDisplay"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/enter_name_here"/>
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -21,7 +28,7 @@
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/homeButtton"
+        android:id="@+id/homeButton"
         android:onClick="returnHome"
         android:text="@string/main_menu"/>
     <Button
