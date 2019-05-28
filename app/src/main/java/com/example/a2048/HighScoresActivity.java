@@ -43,7 +43,7 @@ public class HighScoresActivity extends AppCompatActivity {
                                             null, null, "SCORE DESC");
 
             CursorAdapter listAdapter = new SimpleCursorAdapter(this, R.layout.list_score,
-                    cursor, new String[]{"NAME", "SCORE"}, new int[]{R.id.txt}, 0 );
+                    cursor, new String[]{"SCORE"}, new int[]{R.id.txt}, 0 );
             ListView list = findViewById(R.id.list);
             list.setAdapter(listAdapter);
         } catch (SQLException e){

@@ -1,6 +1,7 @@
 package com.example.a2048;
 
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -22,6 +23,13 @@ public class MenuActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
         colourChoice = "RED";
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Log.i("detroy message", "activity destroyed");
+        stopService(new Intent(this, backgroundMusic.class));
     }
 
     /**
@@ -48,6 +56,11 @@ public class MenuActivity extends AppCompatActivity {
         intent.putExtra(GameActivity.EXTRA_MESSAGE, selection);
         intent.putExtra(GameActivity.COLOUR_STRING, colourChoice);
         startActivity(intent);
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
     }
 
     public void onSettingsStart(View view) {

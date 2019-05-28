@@ -8,6 +8,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -38,7 +39,7 @@ public class GameOverActivity extends AppCompatActivity {
     public void onDestroy() {
         super.onDestroy();
 
-        TextView nameDisplay = findViewById(R.id.nameDisplay);
+        EditText nameDisplay = findViewById(R.id.nameDisplay);
         String name = nameDisplay.toString();
         if (name.equals("Enter Name Here")){
             name = "unknown";
